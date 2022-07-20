@@ -2,12 +2,14 @@ package com.getCert.milestoneManager.model;
 
 import java.io.Serializable;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
 @Entity
+@Table(name="cert_tbl")
 public class Certificate implements Serializable{
 	
 	@Id

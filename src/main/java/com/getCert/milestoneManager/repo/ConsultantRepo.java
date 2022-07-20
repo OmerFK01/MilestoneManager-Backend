@@ -6,10 +6,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.getCert.milestoneManager.model.Consultant;
 
-public interface EmployeeRepo extends JpaRepository<Consultant, Long>{
+public interface ConsultantRepo extends JpaRepository<Consultant, Long>{
 
-	void deleteEmployeeById(Long id);
+	void deleteConsultantById(Long id);
 
-	Optional<Consultant> findEmployeeById(Long id);
+	Optional<Consultant> findConsultantById(Long id);
 
 }

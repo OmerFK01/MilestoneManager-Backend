@@ -18,44 +18,44 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.getCert.milestoneManager.model.Consultant;
-import com.getCert.milestoneManager.services.EmployeeService;
+import com.getCert.milestoneManager.services.ConsultantService;
 
 @RestController
 @RequestMapping("/consultant")
 public class ConsultantController{
-	private final EmployeeService employeeService;
+	private final ConsultantService consultantService;
 
-	public ConsultantController(EmployeeService employeeService) {
-		this.employeeService = employeeService;
+	public ConsultantController(ConsultantService consultantService) {
+		this.consultantService = consultantService;
 	}
 
 	@GetMapping("/all")
-	public ResponseEntity<List<Consultant>> getAllEmployees() {
-		List<Consultant> employees = employeeService.finaAllEmployees();
-		return new ResponseEntity<>(employees, HttpStatus.OK);
+	public ResponseEntity<List<Consultant>> getAllConsultants() {
+		List<Consultant> consultants = consultantService.finaAllConsultants();
+		return new ResponseEntity<>(consultants, HttpStatus.OK);
 	}
 
 	@GetMapping("/find/{id}")
-	public ResponseEntity<Consultant> getAllEmployeeById(@PathVariable("id") Long id) {
-		Consultant employee = employeeService.findEmployeeById(id);
-		return new ResponseEntity<>(employee, HttpStatus.OK);
+	public ResponseEntity<Consultant> getAllConsultantById(@PathVariable("id") Long id) {
+		Consultant consultant = consultantService.findConsultantById(id);
+		return new ResponseEntity<>(consultant, HttpStatus.OK);
 	}
 
 	@PostMapping("/add")
-	public ResponseEntity<Consultant> addEmployee(@RequestBody Consultant employee) {
-		Consultant newEmployee = employeeService.addEmployee(employee);
-		return new ResponseEntity<>(newEmployee, HttpStatus.CREATED);
+	public ResponseEntity<Consultant> addConsultant(@RequestBody Consultant consultant) {
+		Consultant newConsultant = consultantService.addConsultant(consultant);
+		return new ResponseEntity<>(newConsultant, HttpStatus.CREATED);
 	}
 
 	@PutMapping("/update")
-	public ResponseEntity<Consultant> updateEmployee(@RequestBody Consultant employee) {
-		Consultant updateEmployee = employeeService.updateEmployee(employee);
-		return new ResponseEntity<>(updateEmployee, HttpStatus.CREATED);
+	public ResponseEntity<Consultant> updateConsultant(@RequestBody Consultant consultant) {
+		Consultant updateConsultant = consultantService.updateConsultant(consultant);
+		return new ResponseEntity<>(updateConsultant, HttpStatus.CREATED);
 	}
 
 	@DeleteMapping("/delete/{id}")
-	public ResponseEntity<?> deleteEmployee(@PathVariable("id") Long id) {
-		employeeService.deleteEmployee(id);
+	public ResponseEntity<?> deleteConsultant(@PathVariable("id") Long id) {
+		consultantService.deleteConsultant(id);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 /*

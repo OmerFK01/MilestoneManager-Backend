@@ -7,8 +7,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="consultant_tbl")
 public class Consultant implements Serializable{
 	
 	@Id
@@ -17,11 +19,17 @@ public class Consultant implements Serializable{
 	private Long id;
 	private String name;
 	private String email;
+	
+	@Column(name="job_Title")
 	private String jobTitle;
 	private String phone;
+	
+	@Column(name="image_Url")
 	private String imageUrl;
 	@Column(nullable = false, updatable = false)
-	private String employeeType;
+	private String consultantType;
+	
+	
 	public Long getId() {
 		return id;
 	}
@@ -58,17 +66,17 @@ public class Consultant implements Serializable{
 	public void setImageUrl(String imageUrl) {
 		this.imageUrl = imageUrl;
 	}
-	public String getEmployeeType() {
-		return employeeType;
+	public String getConsultantType() {
+		return consultantType;
 	}
-	public void setEmployeeType(String employeeType) {
-		this.employeeType = employeeType;
+	public void setConsultantType(String consultantType) {
+		this.consultantType = consultantType;
 	}
 	
 	
 	@Override
 	public String toString() {
-		return "Employee [id=" + id + ", name=" + name + ", email=" + email + ", jobTitle=" + jobTitle + ", phone="
+		return "Consultant [id=" + id + ", name=" + name + ", email=" + email + ", jobTitle=" + jobTitle + ", phone="
 				+ phone + ", imageUrl=" + imageUrl + "]";
 	}
 	

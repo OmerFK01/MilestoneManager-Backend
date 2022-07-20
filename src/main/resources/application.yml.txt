@@ -1,0 +1,15 @@
+server:
+    port : 8080
+
+spring:
+    datasource :
+        url: jdbc:sqlserver://localhost:1433/employeemanager
+        username: admin
+        password: ofk123
+    jpa:
+        show-sql: true
+        hibernate:
+            ddl-auto: create
+        properties:
+            hibernate:
+                dialect: org.hibernate.dialect.SQLServer2012Dialect
