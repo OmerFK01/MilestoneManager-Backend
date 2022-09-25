@@ -1,4 +1,4 @@
-package com.getCert.milestoneManager.controller;
+/*package com.getCert.milestoneManager.controller;
 
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,3 +20,4 @@ public class RegistrationController {
 		return registrationService.register(request);
 	}
 }
+*/

@@ -26,7 +26,7 @@ import static com.getCert.milestoneManager.constant.SecurityConstant.*;
 import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
 import static java.util.stream.StreamSupport.stream;
 
-import com.getCert.milestoneManager.model.UserPrincipal;
+import com.getCert.milestoneManager.model.ManagerPrincipal;
 
 @Component
 public class JWTTokenProvider {
@@ -34,10 +34,10 @@ public class JWTTokenProvider {
 	@Value("${jwt.secret}")
 	private String secret;
 	
-	public String generateJwtToken(UserPrincipal userPrincipal) {
-		String[] claims = getClaimsFromUser(userPrincipal);
-		return JWT.create().withIssuer(OFK_FDM_LLC).withAudience(GET_ARRAYS_ADMINISTRATION)
-				.withIssuedAt(new Date()).withSubject(userPrincipal.getUsername())
+	public String generateJwtToken(ManagerPrincipal managerPrincipal) {
+		String[] claims = getClaimsFromUser(managerPrincipal);
+		return JWT.create().withIssuer(OFK_LLC).withAudience(OFK_ADMINISTRATION)
+				.withIssuedAt(new Date()).withSubject(managerPrincipal.getUsername())
 				.withArrayClaim(AUTHORITIES, claims).withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
 				.sign(HMAC512(secret.getBytes()));
 	}
@@ -48,10 +48,10 @@ public class JWTTokenProvider {
 	}
 
 	public Authentication getAuthentication(String username, List<GrantedAuthority> authorities, HttpServletRequest request) {
-		UsernamePasswordAuthenticationToken userPasswordauthToken = new
+		UsernamePasswordAuthenticationToken userPasswordAuthToken = new
 				UsernamePasswordAuthenticationToken(username, null, authorities);
-		userPasswordauthToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-		return userPasswordauthToken;
+		userPasswordAuthToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+		return userPasswordAuthToken;
 	}
 	
 	public boolean isTokenValid(String username, String token) {
@@ -78,16 +78,16 @@ public class JWTTokenProvider {
 		JWTVerifier verifier; 
 		try {
 			Algorithm algorithm = HMAC512(secret);
-			verifier = JWT.require(algorithm).withIssuer(OFK_FDM_LLC).build();
+			verifier = JWT.require(algorithm).withIssuer(OFK_LLC).build();
 		}catch(JWTVerificationException exception) {
 			throw new JWTVerificationException(TOKEN_CANNOT_BE_VERIFIED);
 		}
 		return verifier;
 	}
 
-	private String[] getClaimsFromUser(UserPrincipal userPrincipal) {
+	private String[] getClaimsFromUser(ManagerPrincipal managerPrincipal) {
 		List<String> authorities = new ArrayList<>();
-		for (GrantedAuthority grantedAuthority: userPrincipal.getAuthorities()) {
+		for (GrantedAuthority grantedAuthority: managerPrincipal.getAuthorities()) {
 			authorities.add(grantedAuthority.getAuthority());
 		}
 		return authorities.toArray(new String[0]);

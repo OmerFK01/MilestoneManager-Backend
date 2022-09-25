@@ -5,10 +5,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.getCert.milestoneManager.repo.AppUserRepo;
+//import com.getCert.milestoneManager.repo.AppUserRepo;
 
 import lombok.AllArgsConstructor;
 
+/*
 @Service
 @AllArgsConstructor
 public class AppUserService implements UserDetailsService{
@@ -25,3 +26,4 @@ public class AppUserService implements UserDetailsService{
 	
 
 }
+*/

@@ -3,7 +3,6 @@ package com.getCert.milestoneManager.model;
 import java.util.Collection;
 import java.util.Collections;
 
-import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
@@ -24,9 +23,12 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode
 @NoArgsConstructor
-@Entity
+//@Entity
+//@Table(name = "accountManageruser_tbl")
 public class AppUser implements UserDetails{
 
+	private ManagerUserRole managerUserRole;
+	
 	@SequenceGenerator(
 			name = "consultant_sequence",
 			sequenceName = "consultant_sequence",
@@ -43,27 +45,27 @@ public class AppUser implements UserDetails{
 	private String email;
 	private String password;
 	@Enumerated(EnumType.STRING)
-	private AppUserRole appUserRole;
+
 	private boolean locked;
 	private boolean enabled;
 	
 	
 	
-	public AppUser(String name, String username, String email, String password, AppUserRole appUserRole, boolean locked,
-			boolean enabled) {
+	public AppUser(String name, String username, String email, String password, ManagerUserRole managerUserRole, boolean locked,
+                   boolean enabled) {
 		super();
 		this.name = name;
 		this.username = username;
 		this.email = email;
 		this.password = password;
-		this.appUserRole = appUserRole;
+		this.managerUserRole = managerUserRole;
 		this.locked = locked;
 		this.enabled = enabled;
 	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		SimpleGrantedAuthority authority = new SimpleGrantedAuthority(appUserRole.name());
+		SimpleGrantedAuthority authority = new SimpleGrantedAuthority(managerUserRole.name());
 		return Collections.singletonList(authority);
 	}
 

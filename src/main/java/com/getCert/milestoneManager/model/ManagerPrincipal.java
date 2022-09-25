@@ -10,30 +10,30 @@ import org.springframework.security.core.userdetails.UserDetails;
 //import org.springframework.security.core.authority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
-public class UserPrincipal implements UserDetails {
+public class ManagerPrincipal implements UserDetails {
 
-	private AccountManager acctmngr;
+	private Manager mngr;
 
-	public UserPrincipal(AccountManager aM) {
-		this.acctmngr = aM;
+	public ManagerPrincipal(Manager aM) {
+		this.mngr = aM;
 	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
-		return stream(this.acctmngr.getAuthorise()).map(SimpleGrantedAuthority::new).collect(Collectors.toList());
+		
+		return stream(this.mngr.getAuthorise()).map(SimpleGrantedAuthority::new).collect(Collectors.toList());
 	}
 
 	@Override
 	public String getPassword() {
 		//
-		return this.acctmngr.getPassword();
+		return this.mngr.getPassword();
 	}
 
 	@Override
 	public String getUsername() {
 		//
-		return this.acctmngr.getUsername();
+		return this.mngr.getUsername();
 	}
 
 	@Override
@@ -45,7 +45,7 @@ public class UserPrincipal implements UserDetails {
 	@Override
 	public boolean isAccountNonLocked() {
 		//
-		return this.acctmngr.isNotLocked();
+		return this.mngr.isNotLocked();
 	}
 
 	@Override
@@ -57,7 +57,7 @@ public class UserPrincipal implements UserDetails {
 	@Override
 	public boolean isEnabled() {
 		//
-		return this.acctmngr.isActive();
+		return this.mngr.isActive();
 	}
 
 }

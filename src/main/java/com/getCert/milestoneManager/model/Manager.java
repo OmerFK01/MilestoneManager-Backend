@@ -12,8 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "user_tbl")
-public class AccountManager implements Serializable{
+@Table(name = "manager_tbl")
+public class Manager implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(nullable = false, updatable = false)
@@ -24,13 +24,7 @@ public class AccountManager implements Serializable{
 	private String username;
 	private String password;
 	private String email;
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
+	
 
 	private String profileImage;
 	private Date lastLoginDate;
@@ -41,9 +35,15 @@ public class AccountManager implements Serializable{
 	private boolean isActive;
 	private boolean isNotLocked;
 	
-	public AccountManager(Long id, String userId, String firstName, String lastName, String password, String email,
-			String profileImage, Date lastLoginDate, Date lastLoginDateDisplay, Date joinDate, String[] roles,
-			String[] authorise, boolean isActive, boolean isNotLocked) {
+	
+	
+	public Manager() {
+		super();
+	}
+
+	public Manager(Long id, String userId, String firstName, String lastName, String password, String email,
+				   String profileImage, Date lastLoginDate, Date lastLoginDateDisplay, Date joinDate, String[] roles,
+				   String[] authorise, boolean isActive, boolean isNotLocked) {
 		super();
 		this.id = id;
 		this.userId = userId;
@@ -59,6 +59,14 @@ public class AccountManager implements Serializable{
 		this.authorise = authorise;
 		this.isActive = isActive;
 		this.isNotLocked = isNotLocked;
+	}
+	
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	
 	public Long getId() {
